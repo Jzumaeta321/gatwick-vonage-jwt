@@ -83,9 +83,10 @@ app.post('/api/vonage/generate-jwt', (req, res) => {
 app.get('/api/vonage/ncco', (req, res) => {
   res.json([
     {
-      action: 'talk',
-      text: 'Emergencia Gatwick. Revisa el WhatsApp.',
-      language: 'es-MX',
+      action: "talk",
+      text: "<speak><prosody rate='x-slow'>Emergencia Gatwick, <break time='1000ms'/> Revisa WhatsApp urgente.</prosody></speak>",
+      language: "es-ES",
+      voiceName: "Enrique",
       loop: 3
     }
   ]);
