@@ -35,13 +35,17 @@ app.use('/api/', limiter);
 // --- Helpers ---
 
 function generateJWT() {
+  const privateKey = process.env.VONAGE_PRIVATE_KEY
+    ? process.env.VONAGE_PRIVATE_KEY.replace(/\\n/g, '\n')
+    : process.env.VONAGE_API_SECRET.replace(/\\n/g, '\n');
+
   const payload = {
     application_id: process.env.VONAGE_API_KEY,
     iat: Math.floor(Date.now() / 1000),
     exp: Math.floor(Date.now() / 1000) + 3600,
     jti: uuidv4()
   };
-  return jwt.sign(payload, process.env.VONAGE_API_SECRET, { algorithm: 'HS256' });
+  return jwt.sign(payload, privateKey, { algorithm: 'RS256' });
 }
 
 async function makeVonageCall(toNumber, answerUrl) {
