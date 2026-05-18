@@ -111,6 +111,42 @@ app.get('/api/vonage/test-call', async (req, res) => {
   }
 });
 
+// Enviar SMS
+app.post('/api/vonage/send-sms', async (req, res) => {
+  try {
+    const { to } = req.body;
+
+    if (!to) {
+      return res.status(400).json({ error: 'Número de destino requerido' });
+    }
+
+    const apiKey = process.env.VONAGE_API_KEY;
+    const apiSecret = process.env.VONAGE_API_SECRET;
+    const fromNumber = process.env.VONAGE_NUMBER;
+
+    const smsUrl = 'https://rest.nexmo.com/sms/json';
+    const smsParams = new URLSearchParams({
+      api_key: apiKey,
+      api_secret: apiSecret,
+      from: fromNumber,
+      to: to,
+      text: '🚨 GATWICK EMERGENCIAS 🚨\nRevisa WhatsApp URGENTE',
+      type: 'unicode'
+    });
+
+    const response = await fetch(smsUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: smsParams.toString()
+    });
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Llamada desde n8n (POST con body)
 app.post('/api/vonage/call', async (req, res) => {
   const { to, ncco_url } = req.body;
