@@ -120,7 +120,7 @@ app.post('/api/vonage/send-sms', async (req, res) => {
       return res.status(400).json({ error: 'Número de destino requerido' });
     }
 
-    const apiKey = process.env.VONAGE_API_KEY;
+    const apiKey = process.env.VONAGE_SMS_API_KEY;
     const apiSecret = process.env.VONAGE_API_SECRET;
     const fromNumber = process.env.VONAGE_NUMBER;
 
