@@ -84,7 +84,7 @@ app.get('/api/vonage/ncco', (req, res) => {
   res.json([
     {
       action: "talk",
-      text: "<speak><prosody rate='x-slow'>Emergencia Gatwick, <break time='1000ms'/> Revisa WhatsApp urgente.</prosody></speak>",
+      text: "<speak><prosody rate='medium'>Emergencia Gatwick. <break time='700ms'/> Revisa WhatsApp urgente.</prosody></speak>",
       language: "es-ES",
       voiceName: "Enrique",
       loop: 3
