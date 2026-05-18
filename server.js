@@ -164,7 +164,6 @@ app.post('/api/telnyx/send-sms', async (req, res) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: 'GATWICK',
         to: `+${to}`,
         text: '🚨 GATWICK EMERGENCIAS 🚨\nRevisa WhatsApp URGENTE',
         messaging_profile_id: '40019e3c-6053-4325-b86a-c7ca1d277e82'
